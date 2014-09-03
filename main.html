@@ -1,0 +1,54 @@
+<head>
+  <title>Earthdowns</title>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    {{> loginButtons}}
+    {{#if currentUser}}
+    <p>
+      You're logged in.
+    </p>
+    {{/if}}
+    <section class="content">
+      <h1 class="site-title">Earthdowns</h1>
+      {{> leaderboard}}
+      {{> addPlayerForm}}
+    </section>
+  </div>
+</body>
+
+<template name="leaderboard">
+  <ul>
+    {{#each player}}
+      <li class="player {{selectedClass}}">
+        {{name}}: {{pushups}}
+      </li>
+    {{/each}}
+
+    {{#if checkCreatedByUser}}
+    <li>
+      <input type="button" id="increment" value="Give 5 Points" />
+      <input type="button" id="decrement" value="Take 5 Points" />
+      <input type="button" id="remove" value="Remove Player" />
+    </li>
+    {{/if}}
+  </ul>
+
+  <p>
+    {{#if showSelectedPlayer}}
+      Showing: {{showSelectedPlayer.name}} with score {{showSelectedPlayer.pushups}}
+    {{/if}}
+  </p>
+</template>
+
+<template name="addPlayerForm">
+  {{#if currentUser}}
+
+  <form>
+    <input type="text" id="playerName">
+    <input type="submit" value="Add Player">
+  </form>
+  {{/if}}
+</template>
